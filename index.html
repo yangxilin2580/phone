@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>响应式第一个案例</title>
+	<meta name="viewport" content="width=device-width">
+	<style>
+	/* --------------------轮播图---------------- */
+		#zhuti{
+			margin:0 auto;
+			position:relative;
+			overflow:hidden;
+		}
+		#zhuti ul{
+			width:1000000000px;
+		}
+		#zhuti li{
+			width:1349px;
+			float:left;
+		}
+		#zhuti li img{
+			width:100%;
+			display:block;
+		}
+		#prev,#next{
+			position:absolute;
+			top:190px;
+			cursor:pointer;
+			transition:3s;
+			opacity:0.6;
+		}
+		#prev:hover,#next:hover{
+			opacity:1;
+			transform:scale(1.1);
+		}
+		#prev{
+			left:20px;
+		}
+		#next{
+			right:20px;
+		}
+		#dian{
+			position: absolute;
+        	bottom:25px;
+        	left:45%;
+		}
+		#dian span{
+			display:block;
+        	width:16px;
+        	height:16px;
+        	border-radius:50%;
+        	float:left;
+        	margin-right:8px;
+        	cursor:pointer;
+        	background-color:#FFF;
+        	/*font-size:0;*/
+		}
+		#dian .focus{
+        	background-color:yellow;
+      	}
+
+		body{background-color:#f7f7f7;}
+		*{margin:0;padding:0;}
+		li{list-style:none}
+		a{
+			text-decoration:none;
+			font-size:14px;
+			color:#fff;
+		}
+		.banxin{
+			width:90%;
+			margin:0 auto;
+		}
+		header{
+			background-color:#555;
+			height:36px;
+			line-height:36px;
+			padding:0 20px;
+		}
+		header .tel{
+			float:left;
+		}
+		header ul{
+			float:right;
+		}
+		header li{
+			float:left;
+			border-right:1px solid #999;
+			padding:0 20px;
+		}
+		header .appload{
+			border-right:none;
+		}
+		header a:hover{
+			color:#ecc000;
+		}
+		.top{
+			border-top:2px solid #ecc000;
+			height:66px;
+			line-height:65px;
+			padding:0 20px;
+			font-weight:bold;
+		}
+		.top .logo{
+			float:left;
+		}
+		.top ul{
+			float:right;
+		}
+		.top li{
+			border-right:1px solid #f0ede8;
+			float:left;
+			padding:0 20px;
+		}
+		.top li:last-child{border-right:none;}
+		.top a{
+			color:#7b7a65;
+		}
+		.top a:hover{color:#ecc000;}
+		.chengjiao{
+			background-color:#7c7266;
+			height:63px;
+			line-height:63px;
+			padding:0 20px;
+		}
+		.jinge{
+			float:left;
+		}
+		.baogao{
+			float:right;
+		}
+		.clear{clear:both;}
+		.chengjiao{
+			font-size:14px;
+			color:#fff;
+		}
+		.money{
+			display:inline-block;
+			background-color:#f2f1ef;
+			height:25px;
+			line-height:25px;
+			letter-spacing:3px;
+			color:#ff9700;
+			margin:0 8px;
+			padding:0 3px;
+			font-size:16px;
+			font-weight:bold;
+			border-radius:2px;
+		}
+		.baogao{
+			margin-right:60px;
+		}
+		.baogao a:hover{
+			color:#ecc000;
+		}
+		.all{
+      		margin-top:40px;
+			font-size:14px;
+			color:#989a99;
+		/*	display: flex;
+			justify-content:space-between;*/
+      	}
+      	.item{
+			background-color:#fff;
+			height:70px;
+			width:32%;
+			float:left;
+			text-align:center;
+      	}
+      	.item:nth-of-type(2){
+      		margin:0 2%;
+      	}
+      	.safe{
+      		font-size:24px;
+      		color:#fd9a00;
+      		float:left;
+      		padding:0 20px;
+      		line-height:70px;
+      		text-align:center;
+      		padding:0 40px;
+      	}
+      	.sanp{
+      		float:left;
+      		padding:5px 20px;
+      	}
+      	.gonggao{
+      		background-color:#fff;
+      		height:40px;
+      		line-height:40px;
+      		font-size:14px;
+			color:#989a99;
+			text-indent:10px;
+			margin-top:20px;
+      	}
+      	.tongzhi{
+      		float: left;
+			font-size:14px;
+			color:#656762;
+      	}
+		.shuju{
+			border-top:2px solid #ecc000;
+			background-color:#fff;
+			margin:20px;
+		}
+		.more{
+			padding-right:10px;
+			float:right;
+		}
+		.more a{
+			font-size:14px;
+			color:#ecc000;	
+		}
+		.shuju table{
+			width:100%;
+			text-align:center;
+		}
+		.shuju td{
+			height:70px;
+			border-bottom:1px solid #f5f9fa;
+		}
+		.guding{
+			font-size:18px;
+			color:#000;
+		}
+		.three{
+			font-size:22px;
+			color:#8b9b9b;
+		}
+		.fontBlack{
+			font-size:12px;
+			color:#000;
+		}
+		.fonthui{
+			color:#969a99;
+			font-size:14px;
+		}
+		.fontYellow{
+			color:#fd9f3f;
+			font-size:16px;
+		}
+		.buy{
+			font-size:14px;
+			color:#fff;
+			display:inline-block;
+			padding:5px 20px;
+			background-color:#fd9f3f;
+		}
+		.select p{
+			font-size:13px;
+			color:#656762;
+		}
+		.zuixin{
+			float:left;
+		}
+		.backColor{
+			background-color:#f5f9fa;
+		}
+		.hidden{
+			display:none;
+		}
+		.bottom{
+			background-color: #fff;
+			border-top: 1px solid #eee;	
+		}
+		.botMain{
+			padding:30px 0;
+		}
+		.bottom th{
+			text-align: left;
+			color:#222;
+			padding-bottom: 5px;
+		}
+		.bottom td a{
+			font-size:14px;
+			color:#666;
+		}
+		.bottom td a:hover{
+			color:#666;
+			text-decoration: underline;
+		}
+		.botLogo{
+			float:left;
+			width:27%;
+		}
+		.bottom table{
+			width:73%;
+		}
+		.banquan{
+			background-color: #ededed;
+		}
+		.banquan{
+			padding:35px 0 60px 0;
+		}
+		.imageLogo{
+			text-align: center;
+		}
+		.imageLogo img{
+			margin:0 5px;
+		}
+		.banquan p{
+			margin-top: 15px;
+			text-align: center;
+			font-size:14px;
+			color:#a19d9e;
+		}
+/* -----------------------------手机端样式------------------------------- */
+		@media screen and (max-width:480px){
+			header .tel,header .about,header .help{display:none;}
+			header li{
+				padding:0 10px;
+			}
+			.hidden{
+				display:block;
+			}
+			.hide{
+				display:none;
+			}
+			.top{
+				text-align:center;
+				line-height:20px;
+				height:106px;
+			}
+			.top li{
+				border-right:none;
+				padding:0 10px;
+			}
+			.top ul{
+				display:inline-block;
+				margin-bottom:10px;
+			}
+			.top  ul,li,.top .logo{
+				float:none;
+			}
+			.displayNone{
+				display:none;
+			}
+			.chengjiao{
+				height:125px;
+				line-height:40px;
+			}
+			.jinge{text-align:center;}
+			.jinge>span{
+				display:inline-block;
+			}
+			.baogao{
+				text-align:center;
+				float:none;
+				margin-right:0;
+			}
+			.baogao span{
+				display:inline-block;
+			}
+			.money{
+				background-color:#7c7364;
+			}
+			#prev,#next{
+				display:none;
+			}
+			#dian span{
+				width:8px;
+				height:8px;
+			}
+			#dian{
+				bottom:10px;
+			}
+			.item{
+				float:none;
+				width:100%;
+				margin-bottom:10px;
+			}
+	      	.item:nth-of-type(2){
+	      		margin:0;
+	      		margin-bottom:10px;
+	      	}
+			.gonggao{
+				width:100%;
+			}
+			.tongzhi{
+				overflow: hidden;
+ 				text-overflow: ellipsis;
+ 				white-space: nowrap;
+ 				width:130px;
+ 				display: inline-block;
+			}
+			.backColor{
+				text-align:center;
+				line-height:40px;
+			}
+			.float{
+				float:left;
+				text-align:center;
+				width:33%;
+				margin-bottom:10px;
+			}
+			.buy{
+				padding:10px 80px;
+				border-radius:5px;
+			}
+			.baohan{
+				padding:20px;
+				text-align:center;
+			}
+			.bought{
+				background-color:#ccc;
+			}
+			.botLogo{
+				display: none;
+			}
+			.bottom table{
+				width:100%;
+			}
+			.bottom th{
+				font-size:12px;
+			}
+			.bottom td a{
+				font-size:12px;
+			}
+			.banquan p{
+				font-size:12px;
+			}
+			.banquan{
+				padding-bottom: 35px;
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+		<div class="tel"><a href="">理财热线：400-888-8888</a></div>
+		<ul>
+			<li><a href="">登录</a></li>
+			<li><a href="">快速注册</a></li>
+			<li class="about"><a href="">关于</a></li>
+			<li class="help"><a href="">帮助</a></li>
+			<li class="appload"><a href="">APP下载</a></li>
+		</ul>
+	</header>
+	<div class="top">
+		<div class="logo">
+			<img src="images/logo.png" alt="">
+		</div>
+		<ul>
+			<li class="displayNone"><a href="">首页</a></li>
+			<li><a href="">理财频道</a></li>
+			<li><a href="">投资频道</a></li>
+			<li><a href="">新手专区</a></li>
+			<li><a href="">安全保障</a></li>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<div class="chengjiao">
+		<div class="jinge">
+			<span>平台累计成交金额<span class="money">19888</span>万元</span>
+			<span>过去七日成交金额<span class="money">1888</span>万元</span>
+		</div>
+		<div class="baogao">
+			<span><a href="">查看平台运营报告</a></span>
+		</div>
+	</div>
+<div id="zhuti">
+		<ul style="margin-left:0;">
+			<li style="width:1349px;"><img src="images/1.jpg" alt=""></li>
+			<li style="width:1349px;"><img src="images/2.jpg" alt=""></li>
+			<li style="width:1349px;"><img src="images/3.jpg" alt=""></li>	
+		</ul>
+		<div id="dian"></div>
+		<img id="prev" src="images/l.png" alt="">
+		<img id="next" src="images/r.png" alt="">
+</div>
+<div class="banxin">
+	<div class="all">
+		<div class="item">
+			<div class="safe">安全</div>
+			<div class="sanp">
+				<p>国家AAA信用平台</p>
+				<p>银行资金托管</p>
+				<p>上市公司背景保障</p>
+			</div>
+		</div>
+		<div class="item">
+			<div class="safe">权威</div>
+			<div class="sanp">
+				<p>中央电视台推荐</p>
+				<p>互联网百强企业</p>
+				<p>标准起草单位</p>
+			</div>
+		</div>
+		<div class="item">
+			<div class="safe">省心</div>
+			<div class="sanp">
+				<p>100元起投</p>
+				<p>用户利益保障机制</p>
+				<p>保险公司承保</p>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="gonggao">
+		<P class="zuixin">最新公告：<span class="displayNone">2015-12-31</span></P>
+		<P class="tongzhi">元旦期间值班间值班公告元旦期间值班间值班公告元旦期间值班间值班公告</P>
+		<P class="more"><a href="">更多公告</a></P>
+	</div>
+	<div class="shuju hide">
+		<table cellspacing="0" cellpadding="10px">
+			<tbody>
+				<tr>
+					<td class="guding backColor">固定期限产品</td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="select backColor">
+						<p>甄选优质基金</p>
+						<p>省时省力</p>
+						<p>坐等收益</p>
+					</td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="shuju hide">
+		<table cellspacing="0" cellpadding="10px">
+			<tbody>
+				<tr>
+					<td class="guding backColor">债权散标产品</td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="select backColor">
+						<p>自主投资</p>
+						<p>期限灵活</p>
+						<!-- <p>坐等收益</p> -->
+					</td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+				<tr>
+					<td class="backColor"></td>
+					<td>
+						<span class="three">3</span><span class="fontBlack">个月</span>
+					</td>
+					<td>
+						<p clsaa="fontBlack">约定年化收益率</p>
+						<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+					</td>
+					<td>
+						<p clsaa="fontBlack">总成交金额</p>
+						<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+					</td>
+					<td><a href="" class="buy">购买</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="shuju hidden">
+		<div class="backColor">
+			<p class="guding">固定期限产品</p>
+			<i class="select">甄选优质基金</i>
+			<i class="select">省时省力</i>
+			<i class="select">坐等收益</i>
+		</div>
+		<div class="baohan">
+			<div class="float">
+				<span class="three">3</span><span class="fontBlack">个月</span>
+			</div>
+			<div class="float">
+				<p class="fontBlack">约定年化收益率</p>
+				<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+			</div>
+			<div class="float">
+				<p class="fontBlack">总成交金额</p>
+				<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+			</div>
+			<a href="" class="buy">投标</a>
+		</div>
+		<div class="baohan">
+			<div class="float">
+				<span class="three">3</span><span class="fontBlack">个月</span>
+			</div>
+			<div class="float">
+				<p class="fontBlack">约定年化收益率</p>
+				<p class="fontYellow">3.50%<span class="fonthui">起</span></p>
+			</div>
+			<div class="float">
+				<p class="fontBlack">总成交金额</p>
+				<p class="fontYellow">18800<span class="fonthui">万元</span></p>
+			</div>
+			<a href="" class="buy bought">已投标</a>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="bottom">
+		<div class="botMain banxin">
+			<div class="botLogo">
+				<a href="#"><img src="images/footlog.jpg" alt=""></a>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>关于我们</th>
+						<th>风险防范</th>
+						<th>理财产品</th>
+						<th>交易帮助</th>
+						<th>机构服务</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="#">公司介绍</a></td>
+						<td><a href="#">账户安全</a></td>
+						<td><a href="#">固定期限</a></td>
+						<td><a href="#">购买</a></td>
+						<td><a href="#">机构中心</a></td>
+					</tr>
+					<tr>
+						<td><a href="#">业务模式</a></td>
+						<td><a href="#">安全保障</a></td>
+						<td><a href="#">债权/散标</a></td>
+						<td><a href="#">赎回</a></td>
+						<td><a href="#">合作联系</a></td>
+					</tr>
+					<tr>
+						<td><a href="#">合作机构</a></td>
+						<td><a href="#">安全保障</a></td>
+						<td></td>
+						<td><a href="#">提现</a></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><a href="#">服务协议</a></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="banquan">
+			<div class="imageLogo">
+				<img src="images/footer01.jpg" alt="">
+				<img src="images/footer02.jpg" alt="">
+				<img src="images/footer03.jpg" alt="">
+				<img src="images/footer04.jpg" alt="">
+				<img src="images/footer05.jpg" alt="">
+				<img src="images/footer06.jpg" alt="">
+				<img src="images/footer07.jpg" alt="">
+			</div>
+			<p>北京某互联网金融公司&nbsp;版权所有®2015-2016</p>
+		</div>
+</div>
+	<script>
+		var prev=document.getElementById('prev')
+		var next=document.getElementById("next")
+		var zhuti=document.getElementById("zhuti")
+		var ul=document.getElementById('zhuti').getElementsByTagName('ul')[0]
+		var liList=ul.getElementsByTagName("li")
+		var dianList = document.getElementById("dian");
+		var	n=0;  /*代表当前图片位置*/
+		var m=0;   //小圆点跟随事件
+		var count = liList.length;
+		var minionclick = false;  //模拟点击事件
+        var isAnimation= false;   //解决多次点击按钮，动画飞出去
+        var widthTrue=false
+        //可视区域的宽度
+        var viewWidth=document.documentElement.offsetWidth
+        var width=document.documentElement.offsetWidth
+		// function changeWidth(width){
+			zhuti.style.width = viewWidth;    //动态获取zhuti的宽度
+			/*-----------------------------------------------*/
+			for(var i = 0 ; i < liList.length ; i++){
+				liList[i].style.width = viewWidth + "px";
+				liList[i].getElementsByTagName("img")[0].style.width = "100%";
+			}
+			/*-------------------------------------------------*/
+			next.onclick=function(){
+			if(!isAnimation){
+				n++;
+			// 正常情况：
+				if(n<count){
+				m++;    
+				animation("next")
+				}
+				if(n == count){
+					newLi=liList[0].cloneNode(true)
+					ul.appendChild(newLi)
+					m=0;  
+					animation("next")
+				}
+			}
+		}
+			prev.onclick=function(){
+	        	if(!isAnimation){
+	        	n--;
+	        // 正常情况：
+	        		if(n!==-1){
+	        			m--;
+	        			animation("prev")
+	        		}
+	        		else{
+	        			n=0;
+	        			newLi = liList[liList.length-1].cloneNode(true); //克隆最后一张
+	        			ul.insertBefore(newLi,ul.firstChild)  //插入到第一个子元素的前面
+	        			ul.style.marginLeft=-(width)+"px"
+	        			animation("prev")
+	        			m = count-1;
+	        			minionclick= true;
+	        		}
+	        	}
+	       	}
+	        function animation(dir){
+	        	exchengdian()  //小圆点颜色跟随图片换
+	            var t1=setInterval(function(){
+	            	isAnimation = true;
+	       			ml=parseInt(ul.style.marginLeft)
+	       			if(dir=="next"){
+	       				ul.style.marginLeft=ml + (Math.floor((n*(-width) - ml) / 12)) + "px"
+	       			}
+	       			if(dir == "prev"){
+	              	ul.style.marginLeft = ml + (Math.ceil((n*(-width) - ml) / 12)) + "px"
+	            }
+					if(ml == n*-width){
+						 if(n == count){ //此处必须要用一个变量来代替length,因length的值现在变成了7，但此时count仍是6
+							ul.style.marginLeft = "0px";  //ul瞬间到达真实的第一张去
+							ul.removeChild(newLi);  //移除临时li
+							n = 0;        //将n校准到正确的位置上
+						}	
+						if(minionclick){
+	                	ul.style.marginLeft = (-(count - 1) * width) + "px"; //ul瞬间到达真实的第一张去
+	                	ul.removeChild(newLi);  //移除临时li
+	                	n = count - 1; //将n校准到正确的位置上
+	                	minionclick = false;
+						}
+						clearInterval(t1) 
+						isAnimation = false; 
+					}	     
+				},16)
+	        }
+	         //自动播放
+        var autoPlay = setInterval(function(){
+        	next.onclick()
+        },3000)
+        //智能判断
+        zhuti.onmouseenter = function(){
+        	clearInterval(autoPlay)
+        }
+        zhuti.onmouseleave = function(){
+          	autoPlay = setInterval(function(){
+            	next.onclick()
+          	},3000)
+        }
+       //生成小圆点事件：
+       	for(i=0;i<count;i++){
+       		var newSpan=document.createElement("span")
+       		dianList.appendChild(newSpan)
+       		newSpan.setAttribute("xiabiao",i) //相当于font-size:0;但浏览器都认识
+        }
+        var spanList = dianList.getElementsByTagName("span");
+        spanList[0].className = "focus";
+//小圆点颜色跟随图片换
+       	function exchengdian(){
+        	for(var i = 0; i < count; i++){
+            	spanList[i].className = ""
+        	}
+          		spanList[m].className = "focus";
+        }
+        // // 枚举小圆点：
+        // for(var i = 0; i < count;i++){
+        // //绑定点击事件
+        // 	spanList[i].innerHTML=i;
+        // 	spanList[i].onclick = function(){
+        // 		m=Number(this.innerHTML)
+        // 		for(i=0;i<count;i++){
+        // 			spanList[i].className = "";
+        // 		}
+        //     	spanList[m].className = "focus";
+        // 	}
+        // }
+        	for(var i = 0; i < count;i++){
+        //绑定点击事件
+        	// spanList[i].innerHTML=i;  //不能加它
+        	spanList[i].onclick = function(){
+        		if(n<this.getAttribute("xiabiao")){
+        			n=this.getAttribute("xiabiao") //更新变量状态
+        			m=n     
+        			animation("next")
+        		}
+        		if(n>this.getAttribute("xiabiao")){
+        			n=this.getAttribute("xiabiao")  //更新变量状态
+        			m=n
+        			animation("prev")
+        		}
+        	}
+        }
+   // }
+ //    if(viewWidth>480){
+	// 	var width=1349
+	// 	changeWidth(width)
+	// }
+ //    if(viewWidth<480){
+ //    	var width=360
+ //    	changeWidth(width)
+ //    }
+  
+ 
+       
+	</script>
+</body>
+</html>
